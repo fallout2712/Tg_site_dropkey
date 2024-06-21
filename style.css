@@ -29,7 +29,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 20vh;
-    min-width: 480px;
 }
 
 .SubContainer2 {
@@ -43,7 +42,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    max-width: 480px;
     height: auto;
 }
 
@@ -194,7 +192,6 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 347px;
     height: 61px;
     margin: 0 auto;
     /* Центрирование меню */
