@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
         tg.setHeaderColor("#000000");
         tg.setBackgroundColor("#000000");
 
-        const tgId = tg.initDataUnsafe?.user?.id;
-        const tgFn = tg.initDataUnsafe?.user?.first_name || "";
-        const tgLn = tg.initDataUnsafe?.user?.last_name || "";
-        let tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
-        const tgLang = tg.initDataUnsafe?.user?.language_code;
+        var tgId = tg.initDataUnsafe?.user?.id;
+        var tgFn = tg.initDataUnsafe?.user?.first_name || "";
+        var tgLn = tg.initDataUnsafe?.user?.last_name || "";
+        var tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
+        var tgLang = tg.initDataUnsafe?.user?.language_code;
 
         console.log("Telegram Photo URL:", tgPhotoUrl); // Отладка значения tgPhotoUrl
 
