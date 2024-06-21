@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tgId = tg.initDataUnsafe?.user?.id;
         const tgFn = tg.initDataUnsafe?.user?.first_name || "";
         const tgLn = tg.initDataUnsafe?.user?.last_name || "";
-        const tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
+        let tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
         const tgLang = tg.initDataUnsafe?.user?.language_code;
 
         console.log("Telegram Photo URL:", tgPhotoUrl); // Отладка значения tgPhotoUrl
