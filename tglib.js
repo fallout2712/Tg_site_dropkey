@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
         const tgLang = tg.initDataUnsafe?.user?.language_code;
 
+        console.log("Telegram Photo URL:", tgPhotoUrl); // Отладка значения tgPhotoUrl
+
         const nickElement = document.querySelector(".Nick p");
         if (nickElement) {
             nickElement.textContent = `${tgFn} ${tgLn}`.trim();
