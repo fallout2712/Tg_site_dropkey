@@ -28,7 +28,8 @@ body {
 .SubContainer1 {
     display: flex;
     flex-direction: column;
-    height: 20vh;
+    height: 15vh;
+    padding-top: 5vh;
 }
 
 .SubContainer2 {
