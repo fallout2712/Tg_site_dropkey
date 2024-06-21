@@ -38,7 +38,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin-top: 2vh;
-    height: 76vh;
+    height: 78vh;
     background-image: url("img/Frame_14.png");
     background-size: 105% 100%;
     background-repeat: no-repeat;
@@ -50,7 +50,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 36px;
 }
 
@@ -63,11 +63,10 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 124px;
-    max-height: 64px;
-    height: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
+    min-width: 160px;
+    min-height: 60px;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 .SubKayTapLable,
