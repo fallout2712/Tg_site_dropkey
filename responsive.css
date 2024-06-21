@@ -11,10 +11,6 @@
         min-width: 480px;
     }
 
-    .SubContainer2 {
-        max-width: 480px;
-    }
-
     .MenuBar {
         width: 347px;
     }
@@ -28,10 +24,6 @@
 @media(min-width:320px) {
     .SubContainer1 {
         min-width: 320px;
-    }
-
-    .SubContainer2 {
-        max-width: 320px;
     }
 
     .MenuBar {

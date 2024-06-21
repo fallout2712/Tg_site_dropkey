@@ -38,9 +38,10 @@ body {
     margin: 10px 0;
     height: 80vh;
     background-image: url("img/Frame_14.png");
-    background-size: contain;
+    background-size: 105% 100%;
     background-repeat: no-repeat;
     background-position: center;
+    min-width: 100%;
 }
 
 .LableEarnKays {
