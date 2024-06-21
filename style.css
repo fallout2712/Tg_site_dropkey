@@ -3,216 +3,55 @@
     margin: 0;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    color: white;
 }
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #000000,#2E0000);
     min-height: 100vh;
 }
 
-.Container1 {
-    display: flex;
-    flex-direction: column;
-    background-image: url("img/background.png");
-    align-items: center;
-    background-size: cover;
-    width: 100%;
-    /* Занимать всю ширину */
-    min-height: 100vh;
-    /* Занимать всю высоту видимого экрана */
-
-}
-
-.SubContainer1 {
-    display: flex;
-    flex-direction: column;
-    height: 15vh;
-    padding-top: 5vh;
-    min-width: 100%;
-}
-
-.SubContainer2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 10px;
-    height: 80vh;
-    background-image: url("img/Frame_14.png");
-    background-size: 105% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-width: 100%;
-}
-
-.LableEarnKays {
+.UserContent {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 36px;
+    justify-content: space-around;
+    min-height: 20vh;
 }
 
-.KayTapLable,
-.KayEarningkLable {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: url("img/Rectangle_9.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-width: 160px;
-    min-height: 60px;
-    margin-left: 5vw;
-    margin-right: 5vw;
-}
-
-.SubKayTapLable,
-.SubKayEarningkLable {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.SubKayTapLable p,
-.SubKayEarningkLable p {
-    color: white;
-    font-size: 20px;
-    margin-left: 10px;
-}
-
-.KayTapLable h1 {
-    color: #F56161;
+.UserContent p{
     font-size: 16px;
-    margin-top: 2px;
 }
 
-.KayEarningkLable h1 {
-    color: #61F5AE;
-    font-size: 16px;
-    margin-top: 2px;
+.SubUserContent1,
+.SubUserContent2,
+.SubUserContent3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 33.3vw;
 }
 
-.CountKayLable {
+.StoneContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 70vh;
+}
+
+.StoneContent h1{
+    font-size: 10vh;
+}
+
+.ButtonContent {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-}
-
-.CountKayLable h1 {
-    color: white;
-    font-size: 50px;
-}
-
-.CountKayLable img,
-.CountKayLable p {
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.ButtomKayLable {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-}
-
-.UserLable {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    color: white;
-    padding-left: 5vw;
-    padding-right: 5vw;
-}
-
-.DataLable {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.Nick {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    color: white;
-    font-size: 12px;
-    min-width: 120px;
-}
-
-.Nick p {
-    margin-left: 2vw;
-}
-
-.Steam {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    background-image: url("img/LableSteam.png");
-    background-size: contain;
-    /* Сохранение пропорций */
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 119px;
-    height: 40px;
-    color: white;
-    font-size: 18px;
-    max-width: 120px;
-}
-
-
-.DataLable h1 {
-    /* Стили для h1 внутри DataLable */
-    font-size: 35px;
-    color: #FFC01C;
-}
-
-.DataLable p {
-    /* Стили для h1 внутри DataLable */
-    font-size: 18px;
-    color: white;
-}
-
-.MenuBar {
-    display: flex;
-    justify-content: space-around;
-    /* Распределение элементов */
-    align-items: center;
-    background-image: url("img/MenuLable.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 61px;
-    margin: 0 auto;
-    /* Центрирование меню */
-    margin-bottom: 5vh;
-}
-
-.Tab1,
-.Tab2,
-.Tab3,
-.Tab4,
-.Tab5 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url("img/SubMenuTabLable.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 61px;
-    height: 61px;
-    color: white;
-    font-size: 10px;
+    min-height: 10vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
