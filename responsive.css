@@ -18,6 +18,11 @@
     .MenuBar {
         width: 347px;
     }
+
+    .ButtomKayLable img {
+        width: 180px;
+        height: 180px;
+    }
 }
 
 @media(min-width:320px) {
@@ -31,5 +36,10 @@
 
     .MenuBar {
         width: 320px;
+    }
+
+    .ButtomKayLable img {
+        width: 160px;
+        height: 160px;
     }
 }
