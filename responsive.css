@@ -1,33 +1,37 @@
-@media(min-width:1024px) {}
-
-@media(min-width:768px) {
-    .MenuBar {
-        width: 347px;
+/* Адаптивные стили для уменьшения размера шрифта на меньших экранах */
+@media (max-width: 1024px) {
+    .DataLable h1 {
+        font-size: 28px;
     }
 }
 
-@media(min-width:480px) {
+@media (max-width: 768px) {
+    .DataLable h1 {
+        font-size: 24px;
 
-
-    .MenuBar {
-        width: 347px;
     }
 
-    .ButtomKayLable img {
-        width: 180px;
-        height: 180px;
+    .DataLable p {
+        font-size: 16px;
     }
 }
 
-@media(min-width:320px) {
-
-
-    .MenuBar {
-        width: 320px;
+@media (max-width: 480px) {
+    .DataLable h1 {
+        font-size: 20px;
     }
 
-    .ButtomKayLable img {
-        width: 160px;
-        height: 160px;
+    .DataLable p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .DataLable h1 {
+        font-size: 18px;
+    }
+
+    .DataLable p {
+        font-size: 12px;
     }
 }
