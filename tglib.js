@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         tg.setBackgroundColor("#000000");
 
         var tgId = tg.initDataUnsafe?.user?.id;
-        var tgFn = tg.initDataUnsafe?.user?.first_name || "";
-        var tgLn = tg.initDataUnsafe?.user?.last_name || "";
+        var tgFn = tg.initDataUnsafe?.user?.first_name || "first";
+        var tgLn = tg.initDataUnsafe?.user?.last_name || "last";
         var tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
         var tgLang = tg.initDataUnsafe?.user?.language_code;
 
