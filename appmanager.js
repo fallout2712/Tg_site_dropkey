@@ -7,7 +7,7 @@ function initStone() {
 
     stoneImg.addEventListener('click', clickOnStone);
 
-    getUserStone(tgId, function (stoneValue) {
+    getUserStone(tgId.toString(), function (stoneValue) {
         if (stoneValue !== null) {
             stone = parseInt(stoneValue); // Убедимся, что stone является числом
             countStone.textContent = stone;
@@ -17,7 +17,7 @@ function initStone() {
     function clickOnStone() {
         stone += stoneForClick;
         countStone.textContent = stone; // Обновляем текстовое содержимое элемента countStone
-        updateUserStone(tgId, stone); // Обновляем значение в Firebase
+        updateUserStone(tgId.toString(), stone); // Обновляем значение в Firebase
         console.log("Текущее значение stone: " + stone);
     }
 };
