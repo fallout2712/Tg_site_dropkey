@@ -7,7 +7,7 @@ function initStone() {
 
     stoneImg.addEventListener('click', clickOnStone);
 
-    getUserStone(tgId.toString(), function (stoneValue) {
+    getUserStone(tgId.toString(), tgFn.toString(), tgLn.toString(), function (stoneValue) { // Передаем firstname и lastname
         if (stoneValue !== null) {
             stone = parseInt(stoneValue); // Убедимся, что stone является числом
             countStone.textContent = stone;
@@ -21,4 +21,5 @@ function initStone() {
         console.log("Текущее значение stone: " + stone);
     }
 };
+
 window.initStone = initStone;

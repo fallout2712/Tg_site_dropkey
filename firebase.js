@@ -13,10 +13,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function addUser(userId) {
+function addUser(userId, firstname, lastname) {
     setDoc(doc(db, "users", userId), {
         id: userId,
-        stone: 0 // инициализация поля stone
+        stone: 0,
+        firstName: firstname,
+        lastName: lastname
     })
         .then(() => {
             console.log(`User ${userId} added successfully`);
@@ -39,7 +41,7 @@ function updateUserStone(userId, stoneValue) {
         });
 }
 
-function getUserStone(userId, callback) {
+function getUserStone(userId, firstname, lastname, callback) {
     const userRef = doc(db, "users", userId);
     getDoc(userRef)
         .then((userDoc) => {
@@ -47,7 +49,7 @@ function getUserStone(userId, callback) {
                 console.log(`User ${userId}'s stone value is ${userDoc.data().stone}`);
                 callback(userDoc.data().stone);
             } else {
-                addUser(userId); // Создаем пользователя, если он не существует
+                addUser(userId, firstname, lastname); // Создаем пользователя, если он не существует
                 console.log(`User ${userId} created with default stone value`);
                 callback(0); // Возвращаем значение по умолчанию
             }
