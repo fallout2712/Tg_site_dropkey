@@ -1,7 +1,7 @@
 var tgInit = true;
 var tgId = "123456789";
-var tgFn = "FirstName";
-var tgLn = "SecondName";
+var tgFn = "";
+var tgLn = "";
 
 document.addEventListener("DOMContentLoaded", function () {
     const tg = window.Telegram.WebApp;
