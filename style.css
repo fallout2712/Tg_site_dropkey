@@ -9,7 +9,7 @@
 body {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, #000000,#2E0000);
+    background: linear-gradient(to bottom, #000000, #2E0000);
     min-height: 100vh;
 }
 
@@ -21,13 +21,13 @@ body {
     min-height: 20vh;
 }
 
-.UserContent p{
+.UserContent p {
     font-size: 16px;
 }
 
 .SubUserContent1,
 .SubUserContent2,
-.SubUserContent3{
+.SubUserContent3 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@ body {
     min-height: 70vh;
 }
 
-.StoneContent h1{
+.StoneContent h1 {
     font-size: 10vh;
 }
 
@@ -52,6 +52,20 @@ body {
     align-items: center;
     justify-content: space-between;
     min-height: 10vh;
-    padding-left: 10vw;
-    padding-right: 10vw;
+}
+
+.SubButtonContent1,
+.SubButtonContent2,
+.SubButtonContent3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 33.3vw;
+}
+
+.SubButtonContent2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
