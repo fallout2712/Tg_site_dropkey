@@ -1,11 +1,15 @@
 let stone = 0;
 let stoneForClick = 1;
 
-const stoneImg = document.getElementById('stone');
-const countStone = document.getElementById('countStone');
+document.addEventListener('DOMContentLoaded', function () {
+    const stoneImg = document.getElementById('stone');
+    const countStone = document.getElementById('countStoneP');
 
-stoneImg.addEventListener('click', function () {
-    stone += stoneForClick;
-    countStone.textContent = stone;
-    console.log("Текущее значение stone: " + stone);
+    stoneImg.addEventListener('click', clickOnStone);
 });
+
+function clickOnStone() {
+    stone += stoneForClick;
+    document.getElementById('countStoneP').textContent = stone;
+    console.log("Текущее значение stone: " + stone);
+}
