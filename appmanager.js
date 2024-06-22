@@ -9,7 +9,7 @@ function initStone() {
 
     getUserStone(tgId, function (stoneValue) {
         if (stoneValue !== null) {
-            stone = stoneValue;
+            stone = parseInt(stoneValue); // Убедимся, что stone является числом
             countStone.textContent = stone;
         }
     });
