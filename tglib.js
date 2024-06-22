@@ -26,4 +26,5 @@ document.addEventListener("DOMContentLoaded", function () {
         tgInit = true;
         initStone();
     }
+    SetUpTg();
 });
