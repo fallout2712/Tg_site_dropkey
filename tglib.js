@@ -22,8 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
         firstName.textContent = `${tgFn}`.trim();
         secondName.textContent = `${tgLn}`.trim();
 
-        getUserStone(tgId);
         tgInit = true;
+
+        console.log("Version app 0.1");
+
         initStone();
     }
     SetUpTg();
