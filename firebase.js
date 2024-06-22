@@ -18,7 +18,8 @@ function addUser(userId, firstname, lastname) {
         id: userId,
         stone: 0,
         firstName: firstname,
-        lastName: lastname
+        lastName: lastname,
+        countTap: 10 // Присваиваем начальное значение 10
     })
         .then(() => {
             console.log(`User ${userId} added successfully`);
@@ -41,17 +42,34 @@ function updateUserStone(userId, stoneValue) {
         });
 }
 
+function updateUserCountTap(userId, countTapValue) {
+    const userRef = doc(db, "users", userId);
+    updateDoc(userRef, {
+        countTap: countTapValue
+    })
+        .then(() => {
+            console.log(`User ${userId}'s countTapValue updated to ${countTapValue}`);
+        })
+        .catch((e) => {
+            console.error("Error updating user countTapValue: ", e);
+        });
+}
+
 function getUserStone(userId, firstname, lastname, callback) {
     const userRef = doc(db, "users", userId);
     getDoc(userRef)
         .then((userDoc) => {
             if (userDoc.exists()) {
+                console.log(`User ${userId}'s countTap value is ${userDoc.data().countTap}`);
                 console.log(`User ${userId}'s stone value is ${userDoc.data().stone}`);
-                callback(userDoc.data().stone);
+                callback({
+                    countTap: userDoc.data().countTap,
+                    stone: userDoc.data().stone
+                });
             } else {
                 addUser(userId, firstname, lastname); // Создаем пользователя, если он не существует
                 console.log(`User ${userId} created with default stone value`);
-                callback(0); // Возвращаем значение по умолчанию
+                callback({ countTap: maxCountTap, stone: 0 }); // Возвращаем значение по умолчанию
             }
         })
         .catch((e) => {
@@ -63,3 +81,4 @@ function getUserStone(userId, firstname, lastname, callback) {
 window.addUser = addUser;
 window.updateUserStone = updateUserStone;
 window.getUserStone = getUserStone;
+window.updateUserCountTap = updateUserCountTap;

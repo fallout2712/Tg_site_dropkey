@@ -11,27 +11,30 @@ function initStone() {
 
     stoneImg.addEventListener('click', clickOnStone);
 
-    getUserStone(tgId.toString(), tgFn.toString(), tgLn.toString(), function (stoneValue) { // Передаем firstname и lastname
-        if (stoneValue !== null) {
-            stone = parseInt(stoneValue); // Убедимся, что stone является числом
+    getUserStone(tgId.toString(), tgFn.toString(), tgLn.toString(), function (data) {
+        if (data !== null) {
+            stone = parseInt(data.stone); // Убедимся, что stone является числом
+            countTap = parseInt(data.countTap); // Убедимся, что countTap является числом
             countStone.textContent = stone;
+            countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
         }
     });
 
     function clickOnStone() {
-        if (maxCountTap > 0) {
+        if (countTap > 0) {
             stone += stoneForClick;
             countStone.textContent = stone; // Обновляем текстовое содержимое элемента countStone
             setCountTapCurrency();
             updateUserStone(tgId.toString(), stone); // Обновляем значение в Firebase
             console.log("Текущее значение stone: " + stone);
+            updateUserCountTap(tgId.toString(), countTap);
         }
     }
 
     function setCountTapCurrency() {
-        maxCountTap -= countTapForClick;
-        countTapCurrency.textContent = `${maxCountTap}/${countTap}`;
+        countTap -= countTapForClick;
+        countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
     }
-};
+}
 
 window.initStone = initStone;
