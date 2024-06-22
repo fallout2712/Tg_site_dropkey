@@ -1,9 +1,13 @@
 let stone = 0;
 let stoneForClick = 1;
+let countTap = 10;
+let countTapForClick = 1;
+let maxCountTap = 10;
 
 function initStone() {
     const stoneImg = document.getElementById('stone');
     const countStone = document.getElementById('countStoneP');
+    const countTapCurrency = document.getElementById('CountTap');
 
     stoneImg.addEventListener('click', clickOnStone);
 
@@ -15,10 +19,18 @@ function initStone() {
     });
 
     function clickOnStone() {
-        stone += stoneForClick;
-        countStone.textContent = stone; // Обновляем текстовое содержимое элемента countStone
-        updateUserStone(tgId.toString(), stone); // Обновляем значение в Firebase
-        console.log("Текущее значение stone: " + stone);
+        if (maxCountTap > 0) {
+            stone += stoneForClick;
+            countStone.textContent = stone; // Обновляем текстовое содержимое элемента countStone
+            setCountTapCurrency();
+            updateUserStone(tgId.toString(), stone); // Обновляем значение в Firebase
+            console.log("Текущее значение stone: " + stone);
+        }
+    }
+
+    function setCountTapCurrency() {
+        maxCountTap -= countTapForClick;
+        countTapCurrency.textContent = `${maxCountTap}/${countTap}`;
     }
 };
 
