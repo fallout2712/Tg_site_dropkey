@@ -19,7 +19,7 @@ function addUser(userId, firstname, lastname) {
         stone: 0,
         firstName: firstname,
         lastName: lastname,
-        countTap: 10 // Присваиваем начальное значение 10
+        countTap: 10
     })
         .then(() => {
             console.log(`User ${userId} added successfully`);
@@ -55,6 +55,20 @@ function updateUserCountTap(userId, countTapValue) {
         });
 }
 
+function updateUserDataVisit(userId) {
+    const userRef = doc(db, "users", userId);
+    const currentDate = new Date().toLocaleTimeString();
+    updateDoc(userRef, {
+        date: currentDate
+    })
+        .then(() => {
+            console.log(`User ${userId}'s curentDate updated to ${currentDate}`)
+        })
+        .catch((e) => {
+            console.error("Error updating user date ", e);
+        })
+}
+
 function getUserStone(userId, firstname, lastname, callback) {
     const userRef = doc(db, "users", userId);
     getDoc(userRef)
@@ -67,9 +81,9 @@ function getUserStone(userId, firstname, lastname, callback) {
                     stone: userDoc.data().stone
                 });
             } else {
-                addUser(userId, firstname, lastname); // Создаем пользователя, если он не существует
+                addUser(userId, firstname, lastname);
                 console.log(`User ${userId} created with default stone value`);
-                callback({ countTap: maxCountTap, stone: 0 }); // Возвращаем значение по умолчанию
+                callback({ countTap: maxCountTap, stone: 0 });
             }
         })
         .catch((e) => {
@@ -78,7 +92,21 @@ function getUserStone(userId, firstname, lastname, callback) {
         });
 }
 
+async function getUserDateVisit() {
+    const userRef = doc(db, "users", tgId.toString());
+    try {
+        const userDoc = await getDoc(userRef);
+        console.log(`User ${tgId.toString()}'s lastDateVisit is ${userDoc.data().date}`);
+        return userDoc.data().date;
+    } catch (e) {
+        console.error("Error getting user date: ", e);
+        return null;
+    }
+}
+
 window.addUser = addUser;
 window.updateUserStone = updateUserStone;
 window.getUserStone = getUserStone;
 window.updateUserCountTap = updateUserCountTap;
+window.updateUserDataVisit = updateUserDataVisit;
+window.getUserDateVisit = getUserDateVisit;

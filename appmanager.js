@@ -6,6 +6,8 @@ let maxCountTap = 10;
 let timerInterval;
 let countdown = 10;
 let milliseconds = 0;
+let lastVisit = "";
+let currentVisit = "";
 
 function initStone() {
     const stoneImg = document.getElementById('stone');
@@ -14,15 +16,19 @@ function initStone() {
     const countTapCurrency = document.getElementById('CountTap');
     const timeCountTap = document.getElementById('TimeCountTap');
 
+    currentVisit = new Date().toLocaleTimeString();
+    console.log("Current visit " + currentVisit);
+
     stoneImg.addEventListener('click', clickOnStone);
 
     getUserStone(tgId.toString(), tgFn.toString(), tgLn.toString(), function (data) {
         if (data !== null) {
-            stone = parseInt(data.stone); // Убедимся, что stone является числом
-            countTap = parseInt(data.countTap); // Убедимся, что countTap является числом
+            stone = parseInt(data.stone);
+            countTap = parseInt(data.countTap);
             countStone.textContent = stone;
-            countTapCurrency.textContent = `${countTap}/${maxCountTap}`; // Обновляем текстовое содержимое элемента countTapCurrency
-            startTimer(); // Запускаем таймер после получения данных пользователя
+            countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
+            checkTimeOffline();
+            startTimer();
         }
     });
 
@@ -30,10 +36,11 @@ function initStone() {
         if (countTap > 0) {
             stone += stoneForClick;
             countTap -= countTapForClick;
-            countStone.textContent = stone; // Обновляем текстовое содержимое элемента countStone
-            countTapCurrency.textContent = `${countTap}/${maxCountTap}`; // Обновляем текстовое содержимое элемента countTapCurrency
-            updateUserStone(tgId.toString(), stone); // Обновляем значение в Firebase
-            updateUserCountTap(tgId.toString(), countTap); // Обновляем значение countTap в Firebase
+            countStone.textContent = stone;
+            countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
+            updateUserStone(tgId.toString(), stone);
+            updateUserCountTap(tgId.toString(), countTap);
+            updateUserDataVisit(tgId.toString());
             console.log("Текущее значение stone: " + stone);
 
             // Добавляем анимацию
@@ -65,7 +72,7 @@ function initStone() {
                     countTap++;
                     updateUserCountTap(tgId.toString(), countTap);
                     countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
-                    countdown = 10; // Сбрасываем таймер
+                    countdown = 10;
                     milliseconds = 0;
                 }
                 timeCountTap.textContent = `${countdown}.${Math.floor(milliseconds / 100)}`;
@@ -74,6 +81,53 @@ function initStone() {
                 clearInterval(timerInterval);
             }
         }, 100);
+    }
+}
+
+function parseTimeString(timeString) {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, seconds, 0);
+    return date;
+}
+
+function differenceDate() {
+    const currentVisitDate = parseTimeString(currentVisit);
+    const lastDateVisitDate = parseTimeString(lastVisit);
+
+    const differenceInMilliseconds = currentVisitDate - lastDateVisitDate;
+
+    const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
+
+    console.log(`Время оффлайн: ${differenceInSeconds} секунд`);
+
+    if (countTap < maxCountTap) {
+        const addTap = Math.ceil(differenceInSeconds / 10);
+        console.log("Бонус за время оффлайн = " + addTap + " тапам");
+
+        if (addTap < 0) {
+            updateUserCountTap(tgId.toString(), maxCountTap);
+            console.log("Скорее всего это следующий день так что тапы на максимум");
+        }
+        else if ((countTap + addTap) > maxCountTap) {
+            updateUserCountTap(tgId.toString(), maxCountTap);
+            console.log("Большой бонус = " + addTap + " значит тапы равны максимуму");
+
+        } else {
+            updateUserCountTap(tgId.toString(), (countTap + addTap));
+            console.log("Добавлено вот столлько = " + addTap + " тапов");
+        }
+    }
+}
+
+async function checkTimeOffline() {
+    try {
+        lastVisit = await getUserDateVisit();
+        if (lastVisit) {
+            differenceDate();
+        }
+    } catch (error) {
+        console.error('Ошибка при выполнении основной функции testDrive:', error);
     }
 }
 
