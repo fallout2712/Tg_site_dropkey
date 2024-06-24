@@ -13,12 +13,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function addUser(userId, firstname, lastname) {
-    setDoc(doc(db, "users", userId), {
-        id: userId,
+function addUser() {
+    setDoc(doc(db, "users"), {
+        id: tgId,
         stone: 0,
-        firstName: firstname,
-        lastName: lastname,
+        firstName: tgFn,
+        lastName: tgLn,
         countTap: 10
     })
         .then(() => {
@@ -29,60 +29,60 @@ function addUser(userId, firstname, lastname) {
         });
 }
 
-function updateUserStone(userId, stoneValue) {
-    const userRef = doc(db, "users", userId);
+function updateUserStone(stoneValue) {
+    const userRef = doc(db, "users", tgId);
     updateDoc(userRef, {
         stone: stoneValue
     })
         .then(() => {
-            console.log(`User ${userId}'s stone updated to ${stoneValue}`);
+            console.log(`User ${tgId}'s stone updated to ${stoneValue}`);
         })
         .catch((e) => {
             console.error("Error updating user stone: ", e);
         });
 }
 
-function updateUserCountTap(userId, countTapValue) {
-    const userRef = doc(db, "users", userId);
+function updateUserCountTap(countTapValue) {
+    const userRef = doc(db, "users", tgId);
     updateDoc(userRef, {
         countTap: countTapValue
     })
         .then(() => {
-            console.log(`User ${userId}'s countTapValue updated to ${countTapValue}`);
+            console.log(`User ${tgId}'s countTapValue updated to ${countTapValue}`);
         })
         .catch((e) => {
             console.error("Error updating user countTapValue: ", e);
         });
 }
 
-function updateUserDataVisit(userId) {
-    const userRef = doc(db, "users", userId);
+function updateUserDataVisit() {
+    const userRef = doc(db, "users", tgId);
     const currentDate = new Date().toLocaleTimeString();
     updateDoc(userRef, {
         date: currentDate
     })
         .then(() => {
-            console.log(`User ${userId}'s curentDate updated to ${currentDate}`)
+            console.log(`User ${tgId}'s curentDate updated to ${currentDate}`)
         })
         .catch((e) => {
             console.error("Error updating user date ", e);
         })
 }
 
-function getUserStone(userId, firstname, lastname, callback) {
-    const userRef = doc(db, "users", userId);
+function getUserStone(callback) {
+    const userRef = doc(db, "users", tgId);
     getDoc(userRef)
         .then((userDoc) => {
             if (userDoc.exists()) {
-                console.log(`User ${userId}'s countTap value is ${userDoc.data().countTap}`);
-                console.log(`User ${userId}'s stone value is ${userDoc.data().stone}`);
+                console.log(`User ${tgId}'s countTap value is ${userDoc.data().countTap}`);
+                console.log(`User ${tgId}'s stone value is ${userDoc.data().stone}`);
                 callback({
                     countTap: userDoc.data().countTap,
                     stone: userDoc.data().stone
                 });
             } else {
-                addUser(userId, firstname, lastname);
-                console.log(`User ${userId} created with default stone value`);
+                addUser();
+                console.log(`User ${tgId} created with default stone value`);
                 callback({ countTap: maxCountTap, stone: 0 });
             }
         })
@@ -90,6 +90,32 @@ function getUserStone(userId, firstname, lastname, callback) {
             console.error("Error getting user stone: ", e);
             callback(null);
         });
+}
+
+async function getUser() {
+    try {
+        const userRef = doc(db, "users", tgId);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (e) {
+        console.error("Error getting user data: ", e);
+        return false;
+    }
+}
+
+async function getUserCountTap() {
+    const userRef = doc(db, "users", tgId.toString());
+    try {
+        const userDoc = await getDoc(userRef);
+        return userDoc.data().countTap;
+    } catch (e) {
+        console.error("Error getting user date: ", e);
+        return null;
+    }
 }
 
 async function getUserDateVisit() {
@@ -110,3 +136,5 @@ window.getUserStone = getUserStone;
 window.updateUserCountTap = updateUserCountTap;
 window.updateUserDataVisit = updateUserDataVisit;
 window.getUserDateVisit = getUserDateVisit;
+window.getUser = getUser;
+window.getUserCountTap = getUserCountTap;

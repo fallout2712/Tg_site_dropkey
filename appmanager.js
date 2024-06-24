@@ -21,7 +21,7 @@ function initStone() {
 
     stoneImg.addEventListener('click', clickOnStone);
 
-    getUserStone(tgId.toString(), tgFn.toString(), tgLn.toString(), function (data) {
+    getUserStone(function (data) {
         if (data !== null) {
             stone = parseInt(data.stone);
             countTap = parseInt(data.countTap);
@@ -38,10 +38,11 @@ function initStone() {
             countTap -= countTapForClick;
             countStone.textContent = stone;
             countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
-            updateUserStone(tgId.toString(), stone);
-            updateUserCountTap(tgId.toString(), countTap);
-            updateUserDataVisit(tgId.toString());
+            updateUserStone(stone);
+            updateUserCountTap(countTap);
+            updateUserDataVisit();
             console.log("Текущее значение stone: " + stone);
+            console.log(getUser());
 
             // Добавляем анимацию
             stoneImg.classList.add('stoneClick');
@@ -70,7 +71,7 @@ function initStone() {
                 }
                 if (countdown <= 0) {
                     countTap++;
-                    updateUserCountTap(tgId.toString(), countTap);
+                    updateUserCountTap(countTap);
                     countTapCurrency.textContent = `${countTap}/${maxCountTap}`;
                     countdown = 10;
                     milliseconds = 0;
@@ -82,6 +83,8 @@ function initStone() {
             }
         }, 100);
     }
+
+    countTap = getUserCountTap();
 }
 
 function parseTimeString(timeString) {
@@ -106,15 +109,15 @@ function differenceDate() {
         console.log("Бонус за время оффлайн = " + addTap + " тапам");
 
         if (addTap < 0) {
-            updateUserCountTap(tgId.toString(), maxCountTap);
+            updateUserCountTap(maxCountTap);
             console.log("Скорее всего это следующий день так что тапы на максимум");
         }
         else if ((countTap + addTap) > maxCountTap) {
-            updateUserCountTap(tgId.toString(), maxCountTap);
+            updateUserCountTap(maxCountTap);
             console.log("Большой бонус = " + addTap + " значит тапы равны максимуму");
 
         } else {
-            updateUserCountTap(tgId.toString(), (countTap + addTap));
+            updateUserCountTap((countTap + addTap));
             console.log("Добавлено вот столлько = " + addTap + " тапов");
         }
     }

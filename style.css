@@ -11,6 +11,7 @@ body {
     flex-direction: column;
     background: linear-gradient(to bottom, #000000, #2E0000);
     min-height: 100vh;
+    touch-action: manipulation;
 }
 
 .UserContent {
