@@ -85,6 +85,7 @@ function initStone() {
     }
 
     countTap = getUserCountTap();
+    getDb();
 }
 
 function parseTimeString(timeString) {

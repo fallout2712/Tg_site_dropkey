@@ -107,6 +107,16 @@ async function getUser() {
     }
 }
 
+async function getDb() {
+    try {
+        const dbRef = doc(db, "db", "message");
+        const dbDoc = await getDoc(dbRef);
+        console.log(dbDoc.data().sometext);
+    } catch (e) {
+        console.error("Error getDb: ", e);
+    }
+}
+
 async function getUserCountTap() {
     const userRef = doc(db, "users", tgId.toString());
     try {
@@ -138,3 +148,4 @@ window.updateUserDataVisit = updateUserDataVisit;
 window.getUserDateVisit = getUserDateVisit;
 window.getUser = getUser;
 window.getUserCountTap = getUserCountTap;
+window.getDb = getDb;
