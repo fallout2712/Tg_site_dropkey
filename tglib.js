@@ -1,14 +1,5 @@
-var tgInit = true;
-var tgId = "123456789";
-var tgFn = "";
-var tgLn = "";
-
 document.addEventListener("DOMContentLoaded", function () {
     const tg = window.Telegram.WebApp;
-
-    tgId = tg.initDataUnsafe?.user?.id || "123456789";
-    tgFn = tg.initDataUnsafe?.user?.first_name || "FirstName";
-    tgLn = tg.initDataUnsafe?.user?.last_name || "SecondName";
 
     function SetUpTg() {
         tg.ready();
@@ -16,17 +7,24 @@ document.addEventListener("DOMContentLoaded", function () {
         tg.setHeaderColor("#000000");
         tg.setBackgroundColor("#000000");
 
-        const firstName = document.querySelector("#firstName");
-        const secondName = document.querySelector("#secondName");
+        var tgId = tg.initDataUnsafe?.user?.id;
+        var tgFn = tg.initDataUnsafe?.user?.first_name || "first";
+        var tgLn = tg.initDataUnsafe?.user?.last_name || "last";
+        var tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
+        var tgLang = tg.initDataUnsafe?.user?.language_code;
 
-        firstName.textContent = `${tgFn}`.trim();
-        secondName.textContent = `${tgLn}`.trim();
+        console.log("Telegram Photo URL:", tgPhotoUrl); // Отладка значения tgPhotoUrl
 
-        tgInit = true;
+        const nickElement = document.querySelector(".Nick p");
+        if (nickElement) {
+            nickElement.textContent = `${tgFn} ${tgLn}`.trim();
+        }
 
-        console.log("Version app 0.1");
-
-        initStone();
+        const imgElement = document.querySelector(".Nick img");
+        if (imgElement && tgPhotoUrl) {
+            imgElement.src = tgPhotoUrl;
+        }
     }
+
     SetUpTg();
 });
