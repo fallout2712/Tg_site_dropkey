@@ -60,14 +60,12 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    width: 100%;
+    min-width: 100%;
 }
 
 .view-1-container-1 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
+    min-height: 9vh;
 }
 
 .view-1-container-2 {
@@ -97,6 +95,7 @@ body {
     border: 2px solid #0F7FC6;
     padding: 10px;
     gap: 10px;
+    margin: 1vh;
 }
 
 .keys-count {
