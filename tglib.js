@@ -1,30 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
+var tgInit = false;
+var tgId = "123456789";
+var tgFn = "";
+var tgLn = "";
+var tgUs = "";
+var tgPh;
+
+function initTg() {
     const tg = window.Telegram.WebApp;
 
-    function SetUpTg() {
-        tg.ready();
-        tg.expand();
-        tg.setHeaderColor("#000000");
-        tg.setBackgroundColor("#000000");
+    tgId = tg.initDataUnsafe?.user?.id || "123456789";
+    tgFn = tg.initDataUnsafe?.user?.first_name || "FirstName";
+    tgLn = tg.initDataUnsafe?.user?.last_name || "SecondName";
+    tgUs = tg.initDataUnsafe?.user?.username || "username";
+    tgPh = tg.initDataUnsafe?.user?.photo_url;
 
-        var tgId = tg.initDataUnsafe?.user?.id;
-        var tgFn = tg.initDataUnsafe?.user?.first_name || "first";
-        var tgLn = tg.initDataUnsafe?.user?.last_name || "last";
-        var tgPhotoUrl = tg.initDataUnsafe?.user?.photo_url;
-        var tgLang = tg.initDataUnsafe?.user?.language_code;
+    console.log("InitDataUnsafe:", tg.initDataUnsafe);
 
-        console.log("Telegram Photo URL:", tgPhotoUrl); // Отладка значения tgPhotoUrl
+    console.log("id " + tgId);
+    console.log("tgFn " + tgFn);
+    console.log("tgLn " + tgLn);
+    console.log("tgUs " + tgUs);
+    console.log("tgPh " + tgPh);
 
-        const nickElement = document.querySelector(".Nick p");
-        if (nickElement) {
-            nickElement.textContent = `${tgFn} ${tgLn}`.trim();
-        }
+    // SetUpTg();
+}
 
-        const imgElement = document.querySelector(".Nick img");
-        if (imgElement && tgPhotoUrl) {
-            imgElement.src = tgPhotoUrl;
-        }
-    }
+function SetUpTg() {
+    tg.ready();
+    tg.expand();
+    tg.setHeaderColor("#000000");
+    tg.setBackgroundColor("#000000");
 
-    SetUpTg();
-});
+    tgInit = true;
+}
+
+window.initTg = initTg;

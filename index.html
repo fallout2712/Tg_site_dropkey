@@ -4,29 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example</title>
+    <title>KeyDropParty | Swixy</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="tglib.js"></script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCSTTDg2lpmenBoE7Xyd9vINeKlVkTZXcg",
-            authDomain: "lastmessage-dfda7.firebaseapp.com",
-            projectId: "lastmessage-dfda7",
-            storageBucket: "lastmessage-dfda7.appspot.com",
-            messagingSenderId: "684419376412",
-            appId: "1:684419376412:web:63197e61625039b026c6d9"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        console.log(app);
-    </script>
+    <script src="appmanager.js"></script>
+    <script src="bootstrap.js"></script>
+    <script type="module" src="firebase.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,70 +20,52 @@
 </head>
 
 <body>
-    <div class="Container1">
-        <div class="SubContainer1">
-            <div class="UserLable">
-                <div class="Nick">
-                    <img src="img/paragraph.png" alt="" width="32px" height="32px">
-                    <p>Nikilay Tretiak</p>
+    <div class="profile-container">
+        <img src="img/paragraph.png" alt="Profile Image" width="64px" height="64px">
+        <p>NickName</p>
+    </div>
+    <div class="content-container">
+        <div id="tab-1" class="tab-content active">
+            <div class="view-1">
+                <div class="click-number">
+                    <img src="img/Key.svg" alt="" width="24px" height="24px">
+                    <p>+1</p>
+                    <img src="img/TapPng.png" alt="" width="24px" height="24px">
                 </div>
-                <div class="Steam">
-                    <p>Steam</p>
-                    <img src="img/steam-icon.png" alt="" width="32px" height="32px">
+                <div class="keys-count">
+                    <img src="img/Key.svg" alt="" width="32px" height="32px">
+                    <p>100</p>
                 </div>
-            </div>
-            <div class="DataLable">
-                <h1>2:16:23:15</h1>
-                <p>up to data drop</p>
-            </div>
-        </div>
-        <div class="SubContainer2">
-            <div class="LableEarnKays">
-                <div class="KayTapLable">
-                    <h1>Up for app</h1>
-                    <div class="SubKayTapLable">
-                        <img src="img/Kay.png" alt="" width="20px" height="20px">
-                        <p>+10</p>
-                    </div>
+                <img src="img/Key.svg" alt="" width="192px" height="192px">
+                <div class="max-count-clik">
+                    <p>max</p>
+                    <h1>10/10</h1>
                 </div>
-                <div class="KayEarningkLable">
-                    <h1>Earn for hour</h1>
-                    <div class="SubKayEarningkLable">
-                        <img src="img/Kay.png" alt="" width="20px" height="20px">
-                        <p>+1000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="CountKayLable">
-                <img src="img/Kay.png" alt="" width="48px" height="48px">
-                <h1>10 000</h1>
-            </div>
-            <div class="ButtomKayLable">
-                <img src="img/Kay.png" alt="" width="260px" height="260px">
-            </div>
-            <div class="MenuBar">
-                <div class="Tab1">
-                    <img src="img/Kay.png" alt="" width="28px" height="28px">
-                    <p>View</p>
-                </div>
-                <div class="Tab2">
-                    <img src="img/MineIcon.png" alt="" width="28px" height="28px">
-                    <p>Mine</p>
-                </div>
-                <div class="Tab3">
-                    <img src="img/FriendIcon.png" alt="" width="28px" height="28px">
-                    <p>Friends</p>
-                </div>
-                <div class="Tab4">
-                    <img src="img/RulesIcon.svg" alt="" width="28px" height="28px">
-                    <p>Rules</p>
-                </div>
-                <div class="Tab5">
-                    <img src="img/ExchangeIcon.svg" alt="" width="28px" height="28px">
-                    <p>Exchange</p>
-                </div>
+                <div class="space"></div>
             </div>
         </div>
+        <div id="tab-2" class="tab-content">
+            <h2>Вкладка 2</h2>
+            <p>Вміст другої вкладки.</p>
+        </div>
+        <div id="tab-3" class="tab-content">
+            <h2>Вкладка 3</h2>
+            <p>Вміст третьої вкладки.</p>
+        </div>
+    </div>
+    <div class="bottom-menu">
+        <button data-tab="tab-1" class="active">
+            <img src="img/Key.svg" alt="" width="40px" height="40px">
+            <p>Rewiew</p>
+        </button>
+        <button data-tab="tab-2">
+            <img src="img/MineIcon.svg" alt="" width="40px" height="40px">
+            <p>Farm</p>
+        </button>
+        <button data-tab="tab-3">
+            <img src="img/ExchangeIcon.svg" alt="" width="40px" height="40px">
+            <p>Exchange</p>
+        </button>
     </div>
 </body>
 
