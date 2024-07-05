@@ -1,6 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
-    loadMenu();
-    initTg();
+document.addEventListener("DOMContentLoaded", async function () {
+    initApp();
 
-    console.log("Version app 0.2");
+    if (await initTg()) {
+        if (await initUser()) {
+            if (lastDataVisit !== undefined)
+                differenceDate();
+
+            startTimer();
+            setNickName();
+            getUserKeysAndAddOpenKey();
+            getUppSettings();
+            updateAllValue();
+            hideLoadScreen();
+
+            if (isSubscribeGroupOne)
+                switchSubscribeGroupOne();
+
+            if (newBieBox == true)
+                removeNewBieGift();
+
+        }
+    }
+
+
+
+    console.log("Version app 0.3");
 });
+

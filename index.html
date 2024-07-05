@@ -3,15 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeyDropParty | Swixy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KeyDropParty v0.4 | Swixy</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KeyDropParty">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="tglib.js"></script>
-    <script src="appmanager.js"></script>
-    <script src="bootstrap.js"></script>
-    <script type="module" src="firebase.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
+    <script src="tglib.js?vers=0.7"></script>
+    <script src="appmanager.js?vers=0.7"></script>
+    <script src="bootstrap.js?vers=0.7"></script>
+    <script src="valueHandler.js?vers=0.7"></script>
+    <script type="module" src="firebase.js?vers=0.7"></script>
+    <link rel="stylesheet" href="style.css?vers=0.7">
+    <link rel="stylesheet" href="responsive.css?vers=0.7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,90 +26,165 @@
 </head>
 
 <body>
-    <div class="profile-container">
-        <img src="img/paragraph.png" alt="Profile Image" width="64px" height="64px">
-        <p>NickName</p>
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner">
+            <img src="img/Key.svg" alt="" width="192px" height="192px">
+        </div>
+        <h1>Loading...</h1>
     </div>
-    <div class="content-container">
-        <div id="tab-1" class="tab-content active">
-            <div class="view-1">
-                <div class="view-1-container-1">
-                    <div class="click-number">
-                        <img src="img/Key.svg" alt="" width="32x" height="32x">
-                        <p>+1</p>
-                        <img src="img/TapPng.png" alt="" width="32x" height="32x">
-                    </div>
-                </div>
-                <div class="view-1-container-2">
-                    <div class="keys-count">
-                        <img src="img/Key.svg" alt="" width="32px" height="32px">
-                        <p>100</p>
-                    </div>
-                </div>
-                <div class="view-1-container-3">
-                    <div class="key-farm-lable">
-                        <img src="img/Key.svg" alt="" width="192px" height="192px">
-                    </div>
-                </div>
-                <div class="view-1-container-4">
-                    <div class="max-count-clik">
-                        <p>max</p>
-                        <h1>10/10</h1>
-                    </div>
-                </div>
-
+    <div id="app" style="display: none;">
+        <div class="profile-container">
+            <div class="profile-sub-container">
+                <img src="img/UserIcon.svg" alt="Profile Image" width="64px" height="64px">
+                <p id="nickName">NickName</p>
             </div>
         </div>
-        <div id="tab-2" class="tab-content">
-            <div class="view-2">
-                <div class="view-2-container-1">
-                    <div class="task-view">
-                        <div class="invite">
-                            <div class="reward">
-                                <p>+2 MAX</p>
-                                <img src="img/TapPng.png" alt="" width="24px" height="24px">
-                            </div>
-                            <div class="conditions">
-                                <p>Invite friend</p>
-                            </div>
-                        </div>
-                        <div class="subscribe">
-                            <div class="reward">
-                                <p>+1</p>
-                                <img src="img/TapPng.png" alt="" width="24px" height="24px">
-                            </div>
-                            <div class="conditions">
-                                <p>Join the group</p>
-                            </div>
-                        </div>
-                        <div class="upgrade">
-                            <div class="reward">
-                                <div class="reward-img">
-                                    <p>+1</p>
-                                    <img src="img/Key.svg" alt="" width="24px" height="24px">
-                                </div>
-                                <img src="img/TapPng.png" alt="" width="24px" height="24px">
-                            </div>
-                            <div class="conditions">
-                                <div class="reward-img">
-                                    <img src="img/Key.svg" alt="" width="24px" height="24px">
-                                    <p>100</p>
-                                </div>
-                            </div>
+        <div class="content-container">
+            <div id="tab-1" class="tab-content active">
+                <div class="view-1">
+                    <div class="view-1-container-1">
+                        <div class="click-number">
+                            <img src="img/Key.svg" alt="" width="32x" height="32x">
+                            <p id="keysPerTap">+1</p>
+                            <img src="img/TapPng.svg" alt="" width="32x" height="32x">
                         </div>
                     </div>
-                </div>
-                <div class="view-2-container-2">
-                    <div class="invited-friend">
-                        <h1>Invited friend:</h1>
+                    <div class="view-1-container-2">
+                        <div class="keys-count">
+                            <img src="img/Key.svg" alt="" width="32px" height="32px">
+                            <p id="keysNumber">100</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="view-1-container-3">
+                        <div class="key-farm-lable">
+                            <img id="key-img" src="img/Key.svg" alt="" width="192px" height="192px">
+                        </div>
+                    </div>
+                    <div class="view-1-container-4">
+                        <div class="max-count-clik">
+                            <p id="timerClick">max</p>
+                            <h1 id="maxTap">10/10</h1>
+                        </div>
+                    </div>
 
+                </div>
             </div>
-        </div>
-        <div id="tab-3" class="tab-content">
-            <h2>Вкладка 3</h2>
-            <p>Вміст третьої вкладки.</p>
+            <div id="tab-2" class="tab-content">
+                <div class="view-2">
+                    <div class="view-2-container-1">
+                        <div class="task-discription">
+                            <p>Tasks:</p>
+                        </div>
+                        <div class="profile-keys-count">
+                            <img src="img/Key.svg" alt="" width="32px" height="32px">
+                            <p id="keysNumberView2">100</p>
+                        </div>
+                    </div>
+                    <div class="view-2-container-2">
+                        <div class="task-view">
+                            <div class="invite">
+                                <div class="reward">
+                                    <p>+2 MAX</p>
+                                    <img src="img/TapPng.svg" alt="" width="24px" height="24px">
+                                </div>
+                                <div onclick="inviteFriend()" class="conditions" role="button" tabindex="0">
+                                    <p>Invite friend</p>
+                                </div>
+                            </div>
+                            <div class="subscribe">
+                                <div class="reward">
+                                    <div class="reward-img">
+                                        <p>+2</p>
+                                        <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                    </div>
+                                    <img src="img/TapPng.svg" alt="" width="24px" height="24px">
+                                </div>
+                                <div id="group-1" onclick="subscriptionOnGroupOne()" class="conditions" role="button"
+                                    tabindex="0">
+                                    <p>Join the group</p>
+                                </div>
+                            </div>
+                            <div class="upgrade">
+                                <div class="reward">
+                                    <div class="reward-img">
+                                        <p>+1</p>
+                                        <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                    </div>
+                                    <img src="img/TapPng.svg" alt="" width="24px" height="24px">
+                                </div>
+                                <div onclick="upgradeClick()" class="conditions" role="button" tabindex="0">
+                                    <div class="reward-img">
+                                        <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                        <p>100</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-2-container-3">
+                        <div class="invited-friend">
+                            <div class="invited-count-friend">
+                                <h1>Invited friends:</h1>
+                                <h1 id="count-friend">0</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="tab-3" class="tab-content">
+                <div class="view-3">
+                    <div class="view-3-container-1">
+                        <div class="task-discription">
+                            <p>Open gifts:</p>
+                        </div>
+                        <div class="profile-keys-count">
+                            <img src="img/Key.svg" alt="" width="32px" height="32px">
+                            <p id="keysNumberView3">100</p>
+                        </div>
+                    </div>
+                    <div class="view-3-container-2">
+                        <div class="gifts-view">
+                            <div id="new-bie-box" class="gift-box">
+                                <div id="box-1" class="gift-container">
+                                    <p>Newbie box</p>
+                                    <img src="img/gift.svg" alt="" width="48px" height="48px">
+                                    <p>Max count by - 1</p>
+                                </div>
+                                <div onclick="GetKey('lowkeys');" class="gift-claim">
+                                    <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                    <p id="new-bie-box-price">200</p>
+                                </div>
+                            </div>
+                            <div class="gift-box">
+                                <div id="box-2" class="gift-container">
+                                    <p>Cummon</p>
+                                    <img src="img/gift.svg" alt="" width="64px" height="64px">
+                                </div>
+                                <div onclick="GetKey('midkeys');" class="gift-claim">
+                                    <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                    <p id="cummon-box-price">1000</p>
+                                </div>
+                            </div>
+                            <div class="gift-box">
+                                <div id="box-3" class="gift-container">
+                                    <p>Rare</p>
+                                    <img src="img/gift.svg" alt="" width="92px" height="92px">
+                                </div>
+                                <div onclick="GetKey('hightkeys');" class="gift-claim">
+                                    <img src="img/Key.svg" alt="" width="24px" height="24px">
+                                    <p id="rare-box-price">5000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-3-container-3">
+                        <div class="open-boxes">
+                            <h1>Public keys:</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="bottom-menu">
@@ -119,6 +200,35 @@
             <img src="img/ExchangeIcon.svg" alt="" width="40px" height="40px">
             <p>Exchange</p>
         </button>
+    </div>
+    </div>
+    <div id="popup" class="hidden">
+        <h1>Tap end earn keys</h1>
+        <img src="img/Key.svg" alt="" width="128px" height="128px">
+        <img src="img/ArrowDown.svg" alt="" width="64px" height="64px">
+        <h1>switch to real key</h1>
+        <p>AAAAA-BBBBB-CCCCCC AAAAA-BBBBB-CCCCC-DDDDD-EEEEE</p>
+        <div class="copy-button">
+            <p>Copy</p>
+        </div>
+        <img src="img/ArrowDown.svg" alt="" width="64px" height="64px">
+        <h1>get it cool games</h1>
+        <img src="img/steamExampleKeys.svg" alt="" width="320px">
+        <div onclick="togglePopup()" class="educational-button">
+            <p>Okay lets go</p>
+        </div>
+        <div class="empty"></div>
+    </div>
+    <div id="app-message" class="hidden">
+        <div class="logo-app-message">
+            <h1>App message</h1>
+        </div>
+        <div class="content-app-message">
+            <p id="app-message-text">test message</p>
+        </div>
+        <div onclick="toggleAppMessage()" class="educational-button">
+            <p>Okay lets go</p>
+        </div>
     </div>
 </body>
 
